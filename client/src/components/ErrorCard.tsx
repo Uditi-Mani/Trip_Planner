@@ -1,0 +1,2 @@
+import { AlertCircle, X } from "lucide-react";
+export function ErrorCard({ message, onDismiss }: { message: string; onDismiss?: () => void }) { return <div role="alert" className="mx-auto flex max-w-2xl items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-red-800 dark:border-red-500/30 dark:bg-red-950/40 dark:text-red-200"><AlertCircle className="mt-0.5 shrink-0" size={19}/><p className="flex-1 text-sm leading-6">{message}</p>{onDismiss && <button onClick={onDismiss} aria-label="Dismiss error"><X size={18}/></button>}</div>; }

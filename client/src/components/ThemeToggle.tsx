@@ -1,0 +1,2 @@
+import { Moon, Sun } from "lucide-react"; import { useDarkMode } from "../hooks/useDarkMode";
+export function ThemeToggle() { const { dark, toggle } = useDarkMode(); return <button onClick={toggle} aria-label="Toggle colour theme" className="rounded-lg border border-pine-100 bg-white p-2 text-pine-700 transition hover:-translate-y-0.5 hover:shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-emerald-100">{dark ? <Sun size={18}/> : <Moon size={18}/>}</button>; }
