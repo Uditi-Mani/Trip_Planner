@@ -6,13 +6,19 @@ import { errorHandler } from "./middleware/errorHandler.js";
 export function createApp() {
   const app = express();
   app.disable("x-powered-by");
+  
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5175",
+];
+
+if (process.env.CLIENT_ORIGIN) {
+  allowedOrigins.push(process.env.CLIENT_ORIGIN);
+}
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "http://localhost:5175",
-      process.env.CLIENT_ORIGIN,
-    ].filter(Boolean),
+    origin: allowedOrigins,
     credentials: true,
   })
 );
