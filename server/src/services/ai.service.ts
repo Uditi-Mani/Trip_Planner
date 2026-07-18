@@ -16,7 +16,20 @@ export async function requestItinerary(prompt: string) {
       const result = generatedTripSchema.safeParse(safeParse(content));
       if (!result.success) throw new AIResponseError("The AI response did not match the itinerary schema.");
       return result.data;
-    } catch (error) { lastError = error; if (attempt === 0) await sleep(400); }
+} catch (error) {
+  console.error("OpenRouter Error:", error);
+
+  if (axios.isAxiosError(error)) {
+    console.error("Status:", error.response?.status);
+    console.error("Response:", error.response?.data);
+  }
+
+  lastError = error;
+
+  if (attempt === 0) {
+    await sleep(400);
+  }
+}
   }
   if (lastError instanceof AIResponseError) throw lastError;
   throw new AIResponseError("The itinerary provider timed out or is temporarily unavailable.");
